@@ -16,7 +16,7 @@ public class ArrayList<T> implements List<T> {
     @Override
     public T get(int index) {
         if (index >= size) {
-            throw new ArrayIndexOutOfBoundsException("Size: " + size + "; index: " + index);
+            checkIndexException(index);
         }
         return (T) values[index];
     }
@@ -32,6 +32,9 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public void remove(int i) {
+        if (i >= size) {
+            checkIndexException(i);
+        }
         if (i >= 0 && i < size) {
             for (int index = i; index < size - 1; index++) {
                 values[index] = values[index + 1];
@@ -73,6 +76,12 @@ public class ArrayList<T> implements List<T> {
             return "list.ArrayList {" +
                     "values = [" + valuesString.toString() +
                     "]}";
+        }
+    }
+
+    private void checkIndexException(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
         }
     }
 }

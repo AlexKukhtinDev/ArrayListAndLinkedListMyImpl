@@ -14,7 +14,7 @@ public class LinkedList<T> implements List<T> {
     @Override
     public T get(int index) {
         if (index < 0 || index >= size) {
-            throw new IllegalArgumentException();
+            checkIndexException(index);
         }
         Node head = first;
         while (index > 0) {
@@ -41,6 +41,9 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public void remove(int i) {
+        if (i >= size) {
+            checkIndexException(i);
+        }
         if (i >= 0 && i < size) {
             Node head = first;
             while (i > 0) {
@@ -67,6 +70,7 @@ public class LinkedList<T> implements List<T> {
         }
     }
 
+
     @Override
     public int size() {
         return size;
@@ -90,9 +94,16 @@ public class LinkedList<T> implements List<T> {
         }
     }
 
+
     private class Node {
         T value;
         Node next;
         Node prev;
+    }
+
+    private void checkIndexException(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 }
