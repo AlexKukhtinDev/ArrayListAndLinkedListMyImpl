@@ -30,15 +30,14 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public void remove(int i) {
-       checkIndexException(i);
-        if (i >= 0 && i < size) {
-            for (int index = i; index < size - 1; index++) {
-                values[index] = values[index + 1];
-            }
-            size--;
-            if (size <= values.length / 4 && values.length > DEFAULT_CAPACITY) {
-                resizeLess();
-            }
+        checkIndexException(i);
+
+        for (int index = i; index < size - 1; index++) {
+            values[index] = values[index + 1];
+        }
+        size--;
+        if (size <= values.length / 4 && values.length > DEFAULT_CAPACITY) {
+            resizeLess();
         }
     }
 

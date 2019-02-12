@@ -13,7 +13,7 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-       checkIndexException(index);
+        checkIndexException(index);
         Node head = first;
         while (index > 0) {
             head = head.next;
@@ -40,32 +40,29 @@ public class LinkedList<T> implements List<T> {
     @Override
     public void remove(int i) {
         checkIndexException(i);
-        if (i >= 0 && i < size) {
-            Node head = first;
-            while (i > 0) {
-                head = head.next;
-                i--;
-            }
-            if (head.prev == null) {
-                first = first.next;
-                if (first != null) {
-                    first.prev = null;
-                }
-            } else {
-                head.prev.next = head.next;
-            }
-            if (head.next == null) {
-                last = last.prev;
-                if (last != null) {
-                    last.next = null;
-                }
-            } else {
-                head.next.prev = head.prev;
-            }
-            size--;
+        Node head = first;
+        while (i > 0) {
+            head = head.next;
+            i--;
         }
+        if (head.prev == null) {
+            first = first.next;
+            if (first != null) {
+                first.prev = null;
+            }
+        } else {
+            head.prev.next = head.next;
+        }
+        if (head.next == null) {
+            last = last.prev;
+            if (last != null) {
+                last.next = null;
+            }
+        } else {
+            head.next.prev = head.prev;
+        }
+        size--;
     }
-
 
     @Override
     public int size() {
